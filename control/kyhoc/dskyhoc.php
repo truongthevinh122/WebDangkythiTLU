@@ -25,6 +25,8 @@ $kyhoc = json_decode($result,JSON_PRETTY_PRINT);
     <thead>
         <tr>
             <th>Kỳ Học</th>
+            <th>Bắt đầu</th>
+            <th>Kết thúc</th>
             <th>Delete</th>
         </tr>
     </thead>
@@ -34,6 +36,8 @@ $kyhoc = json_decode($result,JSON_PRETTY_PRINT);
         ?>
         <tr class="odd gradeX">
           <td><?php echo ''.$kyhoc['data'][$i]['kyhoc_ten'].' '.$kyhoc['data'][$i]['namhoc_ten'].''; ?></td>
+          <td><?php echo $kyhoc['data'][$i]['kyhoc_start'] ?></td>
+          <td><?php echo $kyhoc['data'][$i]['kyhoc_end'] ?></td>
           <td><a href="/api.dangkythi/control/kyhoc/delete.php?kyhoc_id=<?php echo $kyhoc['data'][$i]['kyhoc_id'] ?>" onclick="return checkDelete()">Delete</a></td>
         </tr>
       <?php } ?>

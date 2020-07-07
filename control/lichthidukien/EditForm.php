@@ -95,7 +95,9 @@ for ($i=0; $i < count($ltdk_mon['data']); $i++)
 		</div>
     <div class="input-group">
 			<label>Ngày thi</label>
-      <input type="date" name="LTDK_ngaythi" id="LTDK_ngaythi" required>
+      <input type="date" name="LTDK_ngaythi" id="LTDK_ngaythi"
+      max="<?php echo $kyhoc['data'][$_GET['kyhoc_posit']]['kyhoc_end'] ?>" min="<?php echo $kyhoc['data'][$_GET['kyhoc_posit']]['kyhoc_start'] ?>"
+      required>
 		</div>
     <button type="submit" name="edit" class="btn btn-primary">OK</button>
     <button type="button" class="btn btn-danger" onclick="closeFormEdit()">Close</button>

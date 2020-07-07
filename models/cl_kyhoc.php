@@ -8,6 +8,8 @@ class cl_kyhoc{
   public $kyhoc_id;
   public $kyhoc_ten;
   public $namhoc_ten;
+  public $kyhoc_start;
+  public $kyhoc_end;
   //Constructor with Database
   public function __construct($db){
     $this->conn = $db;
@@ -35,7 +37,10 @@ class cl_kyhoc{
     $query = 'INSERT INTO '. $this->table . '
     SET
       kyhoc_ten = :kyhoc_ten,
-      namhoc_ten = :namhoc_ten';
+      namhoc_ten = :namhoc_ten,
+      kyhoc_start = :kyhoc_start,
+      kyhoc_end = :kyhoc_end
+      ';
 
     // Prepare Statement
     $stmt = $this->conn->prepare($query);
@@ -43,10 +48,14 @@ class cl_kyhoc{
     //Clean data
     $this->kyhoc_ten = htmlspecialchars(strip_tags($this->kyhoc_ten));
     $this->namhoc_ten = htmlspecialchars(strip_tags($this->namhoc_ten));
+    $this->kyhoc_start = htmlspecialchars(strip_tags($this->kyhoc_start));
+    $this->kyhoc_end = htmlspecialchars(strip_tags($this->kyhoc_end));
 
     //Bind data
     $stmt->bindParam(':kyhoc_ten',$this->kyhoc_ten);
     $stmt->bindParam(':namhoc_ten',$this->namhoc_ten);
+    $stmt->bindParam(':kyhoc_start',$this->kyhoc_start);
+    $stmt->bindParam(':kyhoc_end',$this->kyhoc_end);
 
     //Execute query
     if ($stmt->execute()) {

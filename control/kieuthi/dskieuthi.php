@@ -38,7 +38,7 @@ $kieuthi = json_decode($result,JSON_PRETTY_PRINT);
             <th>STT</th>
             <th>Tên Kiểu thi</th>
             <th>Mô tả</th>
-            <th>Edit/delete</th>
+            <th>Delete</th>
         </tr>
     </thead>
     <tbody>
@@ -49,8 +49,8 @@ $kieuthi = json_decode($result,JSON_PRETTY_PRINT);
           <td><?php echo $kieuthi['data'][$i]['kieuthi_id'] ?></td>
           <td><?php echo $kieuthi['data'][$i]['kieuthi_ten'] ?></td>
           <td><?php echo $kieuthi['data'][$i]['kieuthi_mota'] ?></td>
-          <td><a href="">Edit</a>
-            /<a href="/api.dangkythi/control/kieuthi/delete.php?kieuthi_id=<?php echo $kieuthi['data'][$i]['kieuthi_id'] ?>" onclick="return checkDelete()">Delete</a></td>
+          <td>
+            <a href="/api.dangkythi/control/kieuthi/delete.php?kieuthi_id=<?php echo $kieuthi['data'][$i]['kieuthi_id'] ?>" onclick="return checkDelete()">Delete</a></td>
         </tr>
       <?php } ?>
 

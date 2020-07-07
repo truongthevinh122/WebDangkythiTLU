@@ -41,7 +41,7 @@
                     Thống kê lịch thi
                   </div>
                   <div class="panel panel-body">
-                    <?php include('../control/lichthichinhthuc/report.php') ?>
+                    <?php //include('../control/lichthichinhthuc/report.php') ?>
                   </div>
 
                 </div>

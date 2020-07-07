@@ -53,6 +53,9 @@
                 <a href="/api.dangkythi/pages/lichthidukien.php"><i class="fa fa-table"></i> Lịch thi dự kiến</a>
             </li>
             <li>
+                <a href="/api.dangkythi/pages/lichthichinhthuc.php"><i class="fa fa-table"></i> Lịch thi chính thức</a>
+            </li>
+            <li>
                 <a href="/api.dangkythi/pages/quanlydulieu.php"><i class="fa fa fa-upload"></i> Quản lý dữ liệu</a>
             </li>
         </ul>

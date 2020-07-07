@@ -24,9 +24,6 @@ $ltdk_mon = json_decode($result,JSON_PRETTY_PRINT);
 
 <div class="panel-heading">
 
-  <?php include('../control/lichthidukien/AddForm.php') ?>
-  <a class="btn btn-primary open-button" onclick="openFormAdd()">Add</a>
-
 </div>
 <div class="panel-body">
     <div class="table-responsive">
@@ -40,6 +37,7 @@ $ltdk_mon = json_decode($result,JSON_PRETTY_PRINT);
             <th style="width:10%;">Mã Môn</th>
             <th style="width:20%;">Tên Môn</th>
             <th style="width:10%;">Ca Thi</th>
+            <th>Phòng thi</th>
             <th style="width:24%;">Ngày Thi</th>
             <th hidden></th>
             <th hidden></th>
@@ -63,6 +61,7 @@ $ltdk_mon = json_decode($result,JSON_PRETTY_PRINT);
 
              ?></td>
             <td><?php echo $ltdk_mon['data'][$i]['cathi_ten'] ?></td>
+            <td></td>
             <td><?php echo $ltdk_mon['data'][$i]['LTDK_ngaythi'] ?></td>
             <td hidden><?php echo $ltdk_mon['data'][$i]['LTDK_id'] ?></td>
             <td hidden><?php echo $ltdk_mon['data'][$i]['monthi_id'] ?></td>
@@ -85,6 +84,7 @@ $ltdk_mon = json_decode($result,JSON_PRETTY_PRINT);
                       };
             ?></td>
             <td><?php echo $ltdk_mon['data'][$i]['cathi_ten'] ?></td>
+            <td></td>
             <td><?php echo $ltdk_mon['data'][$i]['LTDK_ngaythi'] ?></td>
             <td hidden><?php echo $ltdk_mon['data'][$i]['LTDK_id'] ?></td>
             <td hidden><?php echo $ltdk_mon['data'][$i]['monthi_id'] ?></td>

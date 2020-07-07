@@ -20,7 +20,7 @@
   $data = json_decode(file_get_contents("php://input"));
 
   //SET ID to DELETE
-  $ltct->ltdk_id = $data->ltdk_id;
+  $ltct->ltct = $data->ltct;
 
 
   //DELETE Post

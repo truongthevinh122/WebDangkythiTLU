@@ -37,8 +37,8 @@ $ltct = json_decode($result,JSON_PRETTY_PRINT);
             <th style="width:10%;">Mã Môn</th>
             <th style="width:20%;">Tên Môn</th>
             <th style="width:10%;">Ca Thi</th>
-            <th>Phòng thi</th>
-            <th style="width:24%;">Ngày Thi</th>
+            <th style="width:10%;">Phòng thi</th>
+            <th style="width:10%;">Ngày Thi</th>
             <th hidden></th>
             <th style="width:12%;">Edit/Delete</th>
         </tr>
@@ -47,6 +47,7 @@ $ltct = json_decode($result,JSON_PRETTY_PRINT);
       <?php
       for ($i=0; $i < count($ltct['data']); $i++) {
         if ($ltct['data'][$i]['kyhoc_id']==$filterky) {
+          if ($ltct['data'][$i]['cathi_ten']!=null and $ltct['data'][$i]['ltct_ngaythi']!=null and $ltct['data'][$i]['phongthi_ten']!=null) {
 
           ?>
           <tr>
@@ -65,11 +66,34 @@ $ltct = json_decode($result,JSON_PRETTY_PRINT);
             <td hidden><?php echo $ltct['data'][$i]['ltct_id'] ?></td>
               <td class="center">
                 <a class="open-button openFormEdit" >Edit</a>
-                <a href="/api.dangkythi/control/lichthidukien/delete.php?LTDK_id=<?php echo $ltct['data'][$i]['ltct_id'] ?>"
+                <a href="/api.dangkythi/control/lichthichinhthuc/delete.php?ltct_id=<?php echo $ltct['data'][$i]['ltct_id'] ?>"
                   onclick="return checkDelete()">Delete</a>
             </td>
           </tr>
-      <?php }} ?>
+      <?php }
+      else {
+      ?>
+      <tr style="color: red">
+        <td></td>
+        <td><?php echo $ltct['data'][$i]['monhoc_ma'] ?></td>
+        <td><?php echo $ltct['data'][$i]['monhoc_ten'];
+                  if ($ltct['data'][$i]['monthi_mota'] == 1)
+                  {
+                    echo " (TL)";
+                  };
+
+         ?></td>
+        <td><?php echo $ltct['data'][$i]['cathi_ten'] ?></td>
+        <td><?php echo $ltct['data'][$i]['phongthi_ten'] ?></td>
+        <td><?php echo $ltct['data'][$i]['ltct_ngaythi'] ?></td>
+        <td hidden><?php echo $ltct['data'][$i]['ltct_id'] ?></td>
+          <td class="center">
+            <a class="open-button openFormEdit" >Edit</a>
+            <a href="/api.dangkythi/control/lichthichinhthuc/delete.php?ltct_id=<?php echo $ltct['data'][$i]['ltct_id'] ?>"
+              onclick="return checkDelete()">Delete</a>
+        </td>
+      </tr>
+      <?php }}} ?>
 
     </tbody>
   </table>

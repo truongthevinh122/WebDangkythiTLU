@@ -81,7 +81,7 @@ class cl_ltct{
   //DELETE ---------------------------------------------------------------------------------------------
   public function delete(){
     //CREATE query
-    $query = 'DELETE FROM ' . $this->table . ' WHERE ltct_id = :ltct_id ';
+    $query = 'DELETE FROM tb_ltct WHERE ltct_id = :ltct_id ';
 
     // Prepare Statement
     $stmt = $this->conn->prepare($query);

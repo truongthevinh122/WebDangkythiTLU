@@ -26,7 +26,7 @@ if($_FILES["import_excel"]["name"] != '')
   $data = $spreadsheet->getActiveSheet()->toArray();
   foreach($data as $row)
   {
-    if($row[2]=="" or $row[2]==null){
+    if($row[1]=="" or $row[1]==null){
       $insert_data = array(
        ':monhoc_ma'  => $row[0],
        ':monthi_mota'  => 0,

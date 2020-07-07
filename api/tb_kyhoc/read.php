@@ -29,7 +29,7 @@
     while ($row = $result->fetch(PDO::FETCH_ASSOC)){
       extract($row);
 
-      $kyhoc_item = array('kyhoc_id'=>$kyhoc_id,'kyhoc_ten'=>$kyhoc_ten,'namhoc_ten'=>$namhoc_ten);
+      $kyhoc_item = array('kyhoc_id'=>$kyhoc_id,'kyhoc_ten'=>$kyhoc_ten,'namhoc_ten'=>$namhoc_ten,'kyhoc_start'=>$kyhoc_start,'kyhoc_end'=>$kyhoc_end);
 
       //Push to "data"
 

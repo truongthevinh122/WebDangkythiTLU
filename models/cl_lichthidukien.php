@@ -12,6 +12,8 @@ class cl_ltdk{
   public $kyhoc_id;
   public $cathi_ten;
   public $LTDK_ngaythi;
+  public $kyhoc_start;
+  public $kyhoc_end;
 
   //Constructor with Database
   public function __construct($db){

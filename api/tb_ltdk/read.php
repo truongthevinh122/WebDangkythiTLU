@@ -33,6 +33,8 @@
                               'monthi_id'=>$monthi_id,
                               'monhoc_ma'=>$monhoc_ma,
                               'kyhoc_id'=>$kyhoc_id,
+                              'kyhoc_start'=>$kyhoc_start,
+                              'kyhoc_end'=>$kyhoc_end,
                               'monhoc_ten'=>$monhoc_ten,
                               'cathi_ten'=>$cathi_ten,
                               'LTDK_ngaythi'=>$LTDK_ngaythi

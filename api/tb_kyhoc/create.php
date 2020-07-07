@@ -22,6 +22,9 @@
 
   $kyhoc->kyhoc_ten = $data->kyhoc_ten;
   $kyhoc->namhoc_ten = $data->namhoc_ten;
+  $kyhoc->kyhoc_start = $data->kyhoc_start;
+  $kyhoc->kyhoc_end = $data->kyhoc_end;
+
 
   if($kyhoc->namhoc_ten == null ){
 

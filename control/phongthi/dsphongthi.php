@@ -1,5 +1,5 @@
 <div class="panel-heading">
-  Phòng thi
+  Danh sách phòng
 </div>
 <div class="panel-body">
 <div class="table-responsive">
@@ -7,7 +7,7 @@
     <thead>
         <tr>
             <th>STT</th>
-            <th>Tên phòng thi</th>
+            <th>Tên phòng</th>
             <th>Loại phòng</th>
             <th>Sức chứa</th>
         </tr>

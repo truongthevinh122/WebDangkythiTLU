@@ -6,7 +6,7 @@
                 <a></a>
             </li>
             <li>
-                <a href="https://beta.thanglong.edu.vn/"><i class="fa fa-home"></i> Trang Chủ</a>
+                <a href="userprofile.php"><i class="fa fa-home"></i> Trang Chủ</a>
             </li>
             <!--
             <li>

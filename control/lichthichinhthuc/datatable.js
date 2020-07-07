@@ -3,7 +3,7 @@ $(document).ready(function() {
         "pageLength": 25,
         "columnDefs": [ {
             "orderable": false,
-            "targets": [0,5,6,7]
+            "targets": [0,3]
         } ],
         "order": [[ 1, 'asc' ]],
 

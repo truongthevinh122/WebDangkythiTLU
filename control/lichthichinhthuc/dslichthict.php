@@ -40,7 +40,6 @@ $ltct = json_decode($result,JSON_PRETTY_PRINT);
             <th>Phòng thi</th>
             <th style="width:24%;">Ngày Thi</th>
             <th hidden></th>
-            <th hidden></th>
             <th style="width:12%;">Edit/Delete</th>
         </tr>
     </thead>
@@ -78,7 +77,7 @@ $ltct = json_decode($result,JSON_PRETTY_PRINT);
 <?php } ?>
 </div>
 </div>
-<?php include('../control/lichthidukien/EditForm.php') ?>
+<?php include('../control/lichthichinhthuc/EditForm.php') ?>
 <script language="JavaScript" type="text/javascript">
 function checkDelete(){
     return confirm('Bạn có chắc chắn muốn xóa môn này?');

@@ -14,13 +14,26 @@ $result = curl_exec($chphong);
 curl_close($chphong);
 $phongthi = json_decode($result,JSON_PRETTY_PRINT);
 
+$chca = curl_init('http://localhost:8235/api.dangkythi/api/tb_cathi/read.php');
+curl_setopt($chca, CURLOPT_CUSTOMREQUEST, "GET");
+
+curl_setopt($chca, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($chca, CURLOPT_HTTPHEADER, array(
+  'Content-Type: application/json')
+);
+
+$result = curl_exec($chca);
+
+curl_close($chca);
+$cathi = json_decode($result,JSON_PRETTY_PRINT);
+
 ?>
 
 
 <style>
-.form-popup {
+.form-popup-2 {
   width: 25%;
-  margin: 50px auto;
+  margin: auto auto;
   position: fixed;
   text-align: left;
   padding: 20px;
@@ -31,17 +44,18 @@ $phongthi = json_decode($result,JSON_PRETTY_PRINT);
   z-index: 9;
   bottom: 30%;
   right: 30%;
+  top: 10%;
 }
 
-.input-group {
+.input-group-2 {
     margin: 10px 0px 10px 0px;
 }
-.input-group label {
+.input-group-2 label {
     display: block;
     text-align: left;
     margin: 3px;
 }
-.input-group input {
+.input-group-2 input {
     height: 30px;
     width: 96%;
     padding: 5px 10px;
@@ -62,39 +76,49 @@ $phongthi = json_decode($result,JSON_PRETTY_PRINT);
 
 </style>
 
-<div class="form-popup" id="EditForm">
+<div class="form-popup-2" id="EditForm">
 
   <form method="post" action="/api.dangkythi/control/lichthichinhthuc/edit.php" enctype="multipart/form-data" class="form-container">
-    <div class="input-group">
+    <div class="input-group-2">
 			<input type="hidden" name="ltct_id" id="ltct_id" hidden>
 		</div>
-    <div class="input-group">
+    <div class="input-group-2">
 			<label>Mã Môn</label>
 			<input type="text" name="monhoc_ma" id="monhoc_ma" disabled>
 		</div>
-    <div class="input-group">
+    <div class="input-group-2">
 			<label>Tên Môn</label>
 			<input type="text" name="monhoc_ten" id="monhoc_ten" disabled>
 		</div>
-    <div class="input-group">
+    <div class="input-group-2">
 			<label>Ca thi</label>
       <select class="form-control" name="cathi_ten" id="cathi_ten" required>
         <option disabled selected value="">Chọn ca</option>
-        <option value="1-4">1-4</option>
-        <option value="1-2">1-2</option>
-        <option value="3-4">3-4</option>
-        <option value="3-5">3-5</option>
+        <?php
+          for ($i=0; $i < count($cathi['data']); $i++) {
+         ?>
+         <option value="<?php echo $cathi['data'][$i]['cathi_ten'] ?>">
+           <?php echo $cathi['data'][$i]['cathi_ten'] ?>
+         </option>
+       <?php } ?>
       </select>
 		</div>
-    <div class="input-group">
+    <div class="input-group-2">
+			<label>Phòng thi</label>
       <select class="form-control" name="phongthi_ten" id="phongthi_ten" required>
-        <option disabled selected value="">Chọn ca</option>
-        <option value=""></option>
+        <option disabled selected value="">Chọn phòng thi</option>
+        <?php
+          for ($i=0; $i < count($phongthi['data']); $i++) {
+         ?>
+         <option value="<?php echo $phongthi['data'][$i]['phongthi_ten'] ?>">
+           <?php echo $phongthi['data'][$i]['phongthi_ten'] ?>
+         </option>
+       <?php } ?>
       </select>
-    </div>
-    <div class="input-group">
+		</div>
+    <div class="input-group-2">
 			<label>Ngày thi</label>
-      <input type="date" name="LTDK_ngaythi" id="LTDK_ngaythi"
+      <input type="date" name="ltct_ngaythi" id="ltct_ngaythi"
       max="<?php echo $kyhoc['data'][$_GET['kyhoc_posit']]['kyhoc_end'] ?>" min="<?php echo $kyhoc['data'][$_GET['kyhoc_posit']]['kyhoc_start'] ?>"
       required>
 		</div>
@@ -117,7 +141,7 @@ $phongthi = json_decode($result,JSON_PRETTY_PRINT);
     $('#ltct_id').val(dataktmh[6]);
     $('#cathi_ten').val(dataktmh[3]);
     $('#phongthi_ten').val(dataktmh[4]);
-    $('#LTDK_ngaythi').val(dataktmh[5]);
+    $('#ltct_ngaythi').val(dataktmh[5]);
   });
 
 

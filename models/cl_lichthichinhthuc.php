@@ -38,6 +38,45 @@ class cl_ltct{
   }
 
 
+  //UPDATE------------------------------------------------------------------------------------------------------------
+  public function update(){
+    //CREATE query
+    $query = 'UPDATE tb_ltct
+    SET
+      cathi_ten = :cathi_ten,
+      ltct_ngaythi = :ltct_ngaythi,
+      phongthi_ten = :phongthi_ten
+    WHERE
+      ltct_id = :ltct_id';
+
+    // Prepare Statement
+    $stmt = $this->conn->prepare($query);
+
+    //Clean data
+    $this->ltct_id = htmlspecialchars(strip_tags($this->ltct_id));
+    $this->cathi_ten = htmlspecialchars(strip_tags($this->cathi_ten));
+    $this->ltct_ngaythi = htmlspecialchars(strip_tags($this->ltct_ngaythi));
+    $this->phongthi_ten = htmlspecialchars(strip_tags($this->phongthi_ten));
+
+    //Bind data
+    $stmt->bindParam(':ltct_id',$this->ltct_id);
+    $stmt->bindParam(':cathi_ten',$this->cathi_ten);
+    $stmt->bindParam(':ltct_ngaythi',$this->ltct_ngaythi);
+    $stmt->bindParam(':phongthi_ten',$this->phongthi_ten);
+
+    //Execute query
+    if ($stmt->execute()) {
+      return true;
+    }
+
+    //Print ERROR if something go wrong
+    printf("ERROR: %s.\n",$stmt->error);
+
+    return false;
+
+  }
+
+
 
   //DELETE ---------------------------------------------------------------------------------------------
   public function delete(){

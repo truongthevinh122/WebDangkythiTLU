@@ -55,7 +55,13 @@ $ltdk_mon = json_decode($result,JSON_PRETTY_PRINT);
           <tr>
             <td></td>
             <td><?php echo $ltdk_mon['data'][$i]['monhoc_ma'] ?></td>
-            <td><?php echo $ltdk_mon['data'][$i]['monhoc_ten'] ?></td>
+            <td><?php echo $ltdk_mon['data'][$i]['monhoc_ten'];
+                      if ($ltdk_mon['data'][$i]['monthi_mota'] == 1)
+                      {
+                        echo " (TL)";
+                      };
+
+             ?></td>
             <td><?php echo $ltdk_mon['data'][$i]['cathi_ten'] ?></td>
             <td><?php echo $ltdk_mon['data'][$i]['LTDK_ngaythi'] ?></td>
             <td hidden><?php echo $ltdk_mon['data'][$i]['LTDK_id'] ?></td>
@@ -72,7 +78,12 @@ $ltdk_mon = json_decode($result,JSON_PRETTY_PRINT);
           <tr style="color: red">
             <td></td>
             <td><?php echo $ltdk_mon['data'][$i]['monhoc_ma'] ?></td>
-            <td><?php echo $ltdk_mon['data'][$i]['monhoc_ten'] ?></td>
+            <td><?php echo $ltdk_mon['data'][$i]['monhoc_ten'];
+                      if ($ltdk_mon['data'][$i]['monthi_mota'] == 1)
+                      {
+                        echo " (TL)";
+                      };
+            ?></td>
             <td><?php echo $ltdk_mon['data'][$i]['cathi_ten'] ?></td>
             <td><?php echo $ltdk_mon['data'][$i]['LTDK_ngaythi'] ?></td>
             <td hidden><?php echo $ltdk_mon['data'][$i]['LTDK_id'] ?></td>

@@ -79,6 +79,14 @@
                 </div>
 
               </div>
+              <div class="col-md-6">
+                <div class="panel panel-default">
+
+                  <?php include "../control/phongthi/dsphongthi.php" ?>
+
+                </div>
+
+              </div>
 
             </div>
 
@@ -94,6 +102,7 @@
 
     <?php include('../tabs/jquery.php'); ?>
     <script src="/api.dangkythi/control/bomon/datatable.js"></script>
+    <script src="/api.dangkythi/control/phongthi/datatable.js"></script>
 
 </body>
 </html>

@@ -82,7 +82,12 @@ for ($i=0; $i < count($ltdk_mon['data']); $i++)
             }
                ?>
             value="<?php echo $monthi['data'][$i]['monthi_id'] ?>">
-            <?php echo ''.$monthi['data'][$i]['monhoc_ma'].' - '.$monthi['data'][$i]['monhoc_ten'].' - '.$monthi['data'][$i]['kieuthi_ten'].''; ?>
+            <?php echo ''.$monthi['data'][$i]['monhoc_ma'].' - '.$monthi['data'][$i]['monhoc_ten'].' - '.$monthi['data'][$i]['kieuthi_ten'].'';
+                  if ($monthi['data'][$i]['monthi_mota']==1)
+                  {
+                    echo " (TL)";
+                  };
+             ?>
           </option>
         <?php } ?>
       </select>

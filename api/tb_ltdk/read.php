@@ -31,6 +31,7 @@
 
       $ltdk_mon_item = array('LTDK_id'=>$LTDK_id,
                               'monthi_id'=>$monthi_id,
+                              'monthi_mota'=>$monthi_mota,
                               'monhoc_ma'=>$monhoc_ma,
                               'kyhoc_id'=>$kyhoc_id,
                               'kyhoc_start'=>$kyhoc_start,

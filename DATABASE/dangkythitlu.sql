@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 12, 2020 at 06:18 AM
+-- Generation Time: Jul 07, 2020 at 05:27 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
@@ -31,6 +31,10 @@ CREATE TABLE `lichthidukien_mon` (
 `LTDK_id` int(11)
 ,`monthi_id` int(11)
 ,`monhoc_ma` char(6)
+,`monthi_mota` int(11)
+,`kyhoc_id` int(11)
+,`kyhoc_start` date
+,`kyhoc_end` date
 ,`monhoc_ten` varchar(50)
 ,`cathi_ten` varchar(10)
 ,`LTDK_ngaythi` date
@@ -109,7 +113,11 @@ INSERT INTO `tb_cathi` (`cathi_id`, `cathi_ten`, `batdau`, `ketthuc`) VALUES
 (3, '2', '09:30:00', '11:00:00'),
 (4, '3', '13:15:00', '14:45:00'),
 (5, '4', '15:35:00', '17:00:00'),
-(6, '5', '17:20:00', '19:50:00');
+(6, '5', '17:20:00', '19:50:00'),
+(7, '1-2', '07:15:00', '11:00:00'),
+(8, '3-4', '13:15:00', '17:00:00'),
+(9, '3-5', '13:15:00', '19:50:00'),
+(10, '4-5', '15:35:00', '19:50:00');
 
 -- --------------------------------------------------------
 
@@ -623,6 +631,8 @@ CREATE TABLE `tb_kyhoc` (
   `kyhoc_id` int(11) NOT NULL,
   `kyhoc_ten` varchar(32) NOT NULL,
   `namhoc_ten` varchar(50) DEFAULT NULL,
+  `kyhoc_start` date DEFAULT NULL,
+  `kyhoc_end` date DEFAULT NULL,
   `date_create` datetime(6) NOT NULL DEFAULT current_timestamp(6)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -630,10 +640,10 @@ CREATE TABLE `tb_kyhoc` (
 -- Dumping data for table `tb_kyhoc`
 --
 
-INSERT INTO `tb_kyhoc` (`kyhoc_id`, `kyhoc_ten`, `namhoc_ten`, `date_create`) VALUES
-(1, 'Học kỳ I Nhóm 1', 'Năm học 2019-2020', '2020-06-12 02:52:15.339679'),
-(2, 'Học kỳ I Nhóm 2', 'Năm học 2019-2020', '2020-06-12 02:52:20.822057'),
-(3, 'Học kỳ I Nhóm 3', 'Năm học 2019-2020', '2020-06-12 02:52:29.132769');
+INSERT INTO `tb_kyhoc` (`kyhoc_id`, `kyhoc_ten`, `namhoc_ten`, `kyhoc_start`, `kyhoc_end`, `date_create`) VALUES
+(1, 'Học kỳ III Nhóm 1', 'Năm học 2019-2020', '2020-05-01', '2020-05-31', '2020-06-12 02:52:15.339679'),
+(2, 'Học kỳ III Nhóm 2', 'Năm học 2019-2020', '2020-06-01', '2020-07-15', '2020-06-12 02:52:20.822057'),
+(3, 'Học kỳ III Nhóm 3', 'Năm học 2019-2020', '2020-06-04', '2020-07-15', '2020-06-12 02:52:29.132769');
 
 -- --------------------------------------------------------
 
@@ -647,6 +657,20 @@ CREATE TABLE `tb_ltdk` (
   `cathi_ten` varchar(10) DEFAULT NULL,
   `LTDK_ngaythi` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_ltdk`
+--
+
+INSERT INTO `tb_ltdk` (`LTDK_id`, `monthi_id`, `cathi_ten`, `LTDK_ngaythi`) VALUES
+(3, 32, NULL, NULL),
+(5, 30, '1-2', '2020-06-23'),
+(6, 13, '', '2020-06-27'),
+(7, 23, '', '2020-06-13'),
+(8, 19, '1-4', '2020-06-23'),
+(9, 33, NULL, NULL),
+(10, 15, '1-2', '2020-06-28'),
+(11, 17, '', '2020-07-02');
 
 -- --------------------------------------------------------
 
@@ -1266,14 +1290,35 @@ CREATE TABLE `tb_monthi` (
 --
 
 INSERT INTO `tb_monthi` (`monthi_id`, `monhoc_ma`, `monthi_mota`, `kyhoc_id`) VALUES
-(10, 'AC201', 0, 1),
-(11, 'AC210', 0, 1),
-(12, 'AC211', 0, 1),
 (13, 'AC212', 0, 1),
 (14, 'AC231', 0, 1),
 (15, 'AC314', 0, 1),
 (16, 'AC212', 1, 1),
-(17, 'AC201', 1, 1);
+(17, 'AC201', 1, 1),
+(18, 'AC333', 1, 1),
+(19, 'AC363', 0, 1),
+(20, 'AD312', 0, 1),
+(21, 'AN212A', 0, 1),
+(22, 'AE322', 0, 1),
+(23, 'NA144', 0, 1),
+(30, 'AC211', 0, 1),
+(32, 'AC210', 0, 1),
+(33, 'AC201', 0, 1);
+
+--
+-- Triggers `tb_monthi`
+--
+DELIMITER $$
+CREATE TRIGGER `delete_all_monthi_in_ltdk` BEFORE DELETE ON `tb_monthi` FOR EACH ROW DELETE FROM tb_ltdk
+WHERE tb_ltdk.monthi_id = OLD.monthi_id
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `insert_monthi_to_ltdk` AFTER INSERT ON `tb_monthi` FOR EACH ROW INSERT INTO tb_ltdk
+(tb_ltdk.monthi_id)
+VALUES (NEW.monthi_id)
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -1299,6 +1344,123 @@ INSERT INTO `tb_namhoc` (`namhoc_id`, `namhoc_ten`, `date_created`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tb_phongthi`
+--
+
+CREATE TABLE `tb_phongthi` (
+  `phongthi_ten` varchar(10) NOT NULL,
+  `phongthi_loai` varchar(50) DEFAULT NULL,
+  `phongthi_sl` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_phongthi`
+--
+
+INSERT INTO `tb_phongthi` (`phongthi_ten`, `phongthi_loai`, `phongthi_sl`) VALUES
+('A305', 'Phòng máy', 40),
+('A401', 'Phòng thường', 40),
+('A402', 'Phòng thường', 40),
+('A403', 'Phòng thường', 40),
+('A404', 'Phòng thường', 40),
+('A406', 'Phòng thường', 40),
+('A407', 'Phòng thường', 40),
+('A408', 'Phòng thường', 40),
+('A409', 'Phòng thường', 40),
+('A410', 'Phòng thường', 40),
+('A501', 'Phòng thường', 40),
+('A502', 'Phòng thường', 40),
+('A503', 'Phòng thường', 40),
+('A504', 'Phòng thường', 40),
+('A506', 'Phòng thường', 40),
+('A507', 'Phòng thường', 40),
+('A508', 'Phòng thường', 40),
+('A509', 'Phòng thường', 40),
+('A510', 'Phòng thường', 40),
+('A601', 'Phòng thường', 40),
+('A602', 'Phòng thường', 40),
+('A603', 'Phòng thường', 40),
+('A604', 'Phòng thường', 40),
+('A606', 'Phòng thường', 40),
+('A607', 'Phòng thường', 40),
+('A608', 'Phòng thường', 40),
+('A609', 'Phòng thường', 40),
+('A610', 'Phòng thường', 40),
+('A702', 'Phòng máy', 80),
+('A703', 'Phòng máy', 40),
+('A705', 'Phòng máy', 40),
+('A706', 'Phòng máy', 80),
+('A707', 'Phòng máy', 40),
+('A709', 'Phòng máy', 40),
+('B101', 'Thường', 80),
+('B103', 'Phòng thường', 80),
+('B104', 'Phòng thường', 40),
+('B105 ', 'Phòng thường', 80),
+('B106', 'Phòng thường', 40),
+('B108', 'Phòng thường', 40),
+('B110', 'Phòng thường', 40),
+('B201', 'Phòng thường', 80),
+('B202', 'Phòng thường', 40),
+('B203', 'Phòng thường', 80),
+('B204', 'Phòng thường', 40),
+('B205', 'Phòng thường', 80),
+('B206', 'Phòng thường', 40),
+('B208', 'Phòng thường', 40),
+('B210', 'Phòng thường', 40),
+('B301', 'Phòng thường', 40),
+('B302', 'Phòng thường', 40),
+('B303', 'Phòng thường', 40),
+('B304', 'Phòng thường', 40),
+('B305', 'Phòng máy', 40),
+('B306', 'Phòng thường', 40),
+('B307', 'Phòng thường', 40),
+('B308', 'Phòng thường', 40),
+('B310', 'Phòng thường', 40),
+('B401', 'Phòng thường', 40),
+('B402', 'Phòng thường', 40),
+('B403', 'Phòng thường', 40),
+('B404', 'Phòng thường', 40),
+('B405', 'Phòng máy', 40),
+('B406', 'Phòng thường', 40),
+('B407', 'Phòng thường', 40),
+('B408', 'Phòng thường', 40),
+('B409', 'Phòng thường', 40),
+('B410', 'Phòng thường', 40),
+('B501', 'Phòng thường', 40),
+('B502', 'Phòng thường', 40),
+('B503', 'Phòng thường', 40),
+('B504', 'Phòng thường', 40),
+('B505', 'Phòng máy', 40),
+('B506', 'Phòng thường', 40),
+('B507', 'Phòng thường', 40),
+('B508', 'Phòng thường', 40),
+('B509', 'Phòng thường', 40),
+('B510', 'Phòng thường', 40),
+('B601', 'Phòng thường', 40),
+('B602', 'Phòng thường', 40),
+('B603', 'Phòng thường', 40),
+('B604', 'Phòng thường', 40),
+('B605', 'Phòng thường', 40),
+('B606', 'Phòng thường', 40),
+('B607', 'Phòng thường', 40),
+('B608', 'Phòng thường', 40),
+('B609', 'Phòng thường', 40),
+('B610', 'Phòng thường', 40),
+('B701', 'Phòng máy', 80),
+('B702', 'Phòng thường', 40),
+('B703', 'Phòng thường', 40),
+('B704', 'Phòng thường', 40),
+('B705', 'Phòng thường', 40),
+('B706', 'Phòng thường', 40),
+('B707', 'Phòng máy', 40),
+('B708', 'Phòng thường', 40),
+('B709', 'Phòng thường', 40),
+('B710', 'Phòng thường', 40),
+('Thể chất', 'TC', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -1317,7 +1479,7 @@ CREATE TABLE `user` (
 --
 DROP TABLE IF EXISTS `lichthidukien_mon`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `lichthidukien_mon`  AS  select `tb_ltdk`.`LTDK_id` AS `LTDK_id`,`tb_ltdk`.`monthi_id` AS `monthi_id`,`tb_monthi`.`monhoc_ma` AS `monhoc_ma`,`tb_monhoc`.`monhoc_ten` AS `monhoc_ten`,`tb_ltdk`.`cathi_ten` AS `cathi_ten`,`tb_ltdk`.`LTDK_ngaythi` AS `LTDK_ngaythi` from ((`tb_ltdk` join `tb_monthi` on(`tb_ltdk`.`monthi_id` = `tb_monthi`.`monthi_id`)) join `tb_monhoc` on(`tb_monthi`.`monhoc_ma` = `tb_monhoc`.`monhoc_ma`)) order by `tb_monhoc`.`monhoc_ma` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `lichthidukien_mon`  AS  select `tb_ltdk`.`LTDK_id` AS `LTDK_id`,`tb_ltdk`.`monthi_id` AS `monthi_id`,`tb_monthi`.`monhoc_ma` AS `monhoc_ma`,`tb_monthi`.`monthi_mota` AS `monthi_mota`,`tb_monthi`.`kyhoc_id` AS `kyhoc_id`,`tb_kyhoc`.`kyhoc_start` AS `kyhoc_start`,`tb_kyhoc`.`kyhoc_end` AS `kyhoc_end`,`tb_monhoc`.`monhoc_ten` AS `monhoc_ten`,`tb_ltdk`.`cathi_ten` AS `cathi_ten`,`tb_ltdk`.`LTDK_ngaythi` AS `LTDK_ngaythi` from (((`tb_ltdk` join `tb_monthi` on(`tb_ltdk`.`monthi_id` = `tb_monthi`.`monthi_id`)) join `tb_monhoc` on(`tb_monthi`.`monhoc_ma` = `tb_monhoc`.`monhoc_ma`)) join `tb_kyhoc` on(`tb_kyhoc`.`kyhoc_id` = `tb_monthi`.`kyhoc_id`)) order by `tb_monhoc`.`monhoc_ma` ;
 
 -- --------------------------------------------------------
 
@@ -1376,8 +1538,7 @@ ALTER TABLE `tb_kyhoc`
 --
 ALTER TABLE `tb_ltdk`
   ADD PRIMARY KEY (`LTDK_id`),
-  ADD KEY `monthi_id` (`monthi_id`),
-  ADD KEY `cathi_ten` (`cathi_ten`);
+  ADD KEY `monthi_id` (`monthi_id`);
 
 --
 -- Indexes for table `tb_monhoc`
@@ -1403,6 +1564,12 @@ ALTER TABLE `tb_namhoc`
   ADD UNIQUE KEY `namhoc_ten` (`namhoc_ten`);
 
 --
+-- Indexes for table `tb_phongthi`
+--
+ALTER TABLE `tb_phongthi`
+  ADD PRIMARY KEY (`phongthi_ten`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -1423,7 +1590,7 @@ ALTER TABLE `tb_bomon`
 -- AUTO_INCREMENT for table `tb_cathi`
 --
 ALTER TABLE `tb_cathi`
-  MODIFY `cathi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `cathi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tb_kieuthi`
@@ -1447,19 +1614,19 @@ ALTER TABLE `tb_kyhoc`
 -- AUTO_INCREMENT for table `tb_ltdk`
 --
 ALTER TABLE `tb_ltdk`
-  MODIFY `LTDK_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `LTDK_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tb_monhoc`
 --
 ALTER TABLE `tb_monhoc`
-  MODIFY `monhoc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1765;
+  MODIFY `monhoc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1759;
 
 --
 -- AUTO_INCREMENT for table `tb_monthi`
 --
 ALTER TABLE `tb_monthi`
-  MODIFY `monthi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `monthi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `tb_namhoc`
@@ -1496,8 +1663,7 @@ ALTER TABLE `tb_kyhoc`
 -- Constraints for table `tb_ltdk`
 --
 ALTER TABLE `tb_ltdk`
-  ADD CONSTRAINT `tb_ltdk_ibfk_1` FOREIGN KEY (`monthi_id`) REFERENCES `tb_monthi` (`monthi_id`),
-  ADD CONSTRAINT `tb_ltdk_ibfk_2` FOREIGN KEY (`cathi_ten`) REFERENCES `tb_cathi` (`cathi_ten`);
+  ADD CONSTRAINT `tb_ltdk_ibfk_1` FOREIGN KEY (`monthi_id`) REFERENCES `tb_monthi` (`monthi_id`);
 
 --
 -- Constraints for table `tb_monhoc`

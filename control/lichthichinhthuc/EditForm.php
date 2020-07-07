@@ -1,23 +1,19 @@
 
 <?php
 
-$chmon = curl_init('http://localhost:8235/api.dangkythi/api/tb_monthi/read.php');
-curl_setopt($chmon, CURLOPT_CUSTOMREQUEST, "GET");
+$chphong = curl_init('http://localhost:8235/api.dangkythi/api/tb_phongthi/read.php');
+curl_setopt($chphong, CURLOPT_CUSTOMREQUEST, "GET");
 
-curl_setopt($chmon, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($chmon, CURLOPT_HTTPHEADER, array(
+curl_setopt($chphong, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($chphong, CURLOPT_HTTPHEADER, array(
   'Content-Type: application/json')
 );
 
-$result = curl_exec($chmon);
+$result = curl_exec($chphong);
 
-curl_close($chmon);
-$monthi = json_decode($result,JSON_PRETTY_PRINT);
-$ltdk_monthi_id = array();
-for ($i=0; $i < count($ltdk_mon['data']); $i++)
-{
-  array_push($ltdk_monthi_id,$ltdk_mon['data'][$i]['monthi_id']);
-}
+curl_close($chphong);
+$phongthi = json_decode($result,JSON_PRETTY_PRINT);
+
 ?>
 
 
@@ -68,12 +64,9 @@ for ($i=0; $i < count($ltdk_mon['data']); $i++)
 
 <div class="form-popup" id="EditForm">
 
-  <form method="post" action="/api.dangkythi/control/lichthidukien/edit.php" enctype="multipart/form-data" class="form-container">
+  <form method="post" action="/api.dangkythi/control/lichthichinhthuc/edit.php" enctype="multipart/form-data" class="form-container">
     <div class="input-group">
-			<input type="hidden" name="LTDK_id" id="LTDK_id" hidden>
-		</div>
-    <div class="input-group">
-			<input type="text" name="monthi_id" id="monthi_id" hidden>
+			<input type="hidden" name="ltct_id" id="ltct_id" hidden>
 		</div>
     <div class="input-group">
 			<label>Mã Môn</label>
@@ -93,6 +86,12 @@ for ($i=0; $i < count($ltdk_mon['data']); $i++)
         <option value="3-5">3-5</option>
       </select>
 		</div>
+    <div class="input-group">
+      <select class="form-control" name="phongthi_ten" id="phongthi_ten" required>
+        <option disabled selected value="">Chọn ca</option>
+        <option value=""></option>
+      </select>
+    </div>
     <div class="input-group">
 			<label>Ngày thi</label>
       <input type="date" name="LTDK_ngaythi" id="LTDK_ngaythi"
@@ -115,10 +114,10 @@ for ($i=0; $i < count($ltdk_mon['data']); $i++)
     console.log(dataktmh);
     $('#monhoc_ma').val(dataktmh[1]);
     $('#monhoc_ten').val(dataktmh[2]);
-    $('#LTDK_id').val(dataktmh[5]);
-    $('#monthi_id').val(dataktmh[6]);
+    $('#ltct_id').val(dataktmh[6]);
     $('#cathi_ten').val(dataktmh[3]);
-    $('#LTDK_ngaythi').val(dataktmh[4]);
+    $('#phongthi_ten').val(dataktmh[4]);
+    $('#LTDK_ngaythi').val(dataktmh[5]);
   });
 
 

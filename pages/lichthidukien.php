@@ -58,7 +58,6 @@
          <!-- /. PAGE WRAPPER  -->
      <!-- /. WRAPPER  -->
      <script src="/api.dangkythi/control/lichthidukien/datatable.js" ></script>
-     <script src="/api.dangkythi/control/lichthidukien/datatable2.js" ></script>
     <?php include('../tabs/jquery.php'); ?>
 </body>
 </html>

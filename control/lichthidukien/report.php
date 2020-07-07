@@ -49,11 +49,10 @@ $Smonthi=0;
                   <td></td>
                   <td><?php echo $ltdk_mon['data'][$j]['monhoc_ma'] ?></td>
                   <td><?php echo $ltdk_mon['data'][$j]['monhoc_ten'];
-                  if ($ltdk_mon['data'][$i]['monthi_mota'] == 1)
-                  {
-                    echo " (TL)";
-                  };
-
+                            if($ltdk_mon['data'][$j]['monthi_mota'])
+                            {
+                              echo " (TL)";
+                            };
                   ?></td>
                   <td><?php echo $ltdk_mon['data'][$j]['cathi_ten'] ?></td>
                   <td><?php echo $ltdk_mon['data'][$j]['LTDK_ngaythi'] ?></td>

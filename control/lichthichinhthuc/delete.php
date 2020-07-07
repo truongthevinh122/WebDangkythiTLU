@@ -1,8 +1,8 @@
 <?php
-$data = array("LTDK_id" => $_GET['LTDK_id']);
+$data = array("ltct_id" => $_GET['ltct_id']);
 $data_string = json_encode($data);
 
-$ch = curl_init('http://localhost:8235/api.dangkythi/api/tb_ltdk/delete.php');
+$ch = curl_init('http://localhost:8235/api.dangkythi/api/tb_ltct/delete.php');
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
 curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

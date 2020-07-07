@@ -7,17 +7,17 @@ $filterky ="";
 ?>
 <?php
 
-$chltdk = curl_init('http://localhost:8235/api.dangkythi/api/tb_ltdk/read.php');
-curl_setopt($chltdk, CURLOPT_CUSTOMREQUEST, "GET");
-curl_setopt($chltdk, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($chltdk, CURLOPT_HTTPHEADER, array(
+$chltct = curl_init('http://localhost:8235/api.dangkythi/api/tb_ltct/read.php');
+curl_setopt($chltct, CURLOPT_CUSTOMREQUEST, "GET");
+curl_setopt($chltct, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($chltct, CURLOPT_HTTPHEADER, array(
   'Content-Type: application/json')
 );
 
-$result = curl_exec($chltdk);
+$result = curl_exec($chltct);
 
-curl_close($chltdk);
-$ltdk_mon = json_decode($result,JSON_PRETTY_PRINT);
+curl_close($chltct);
+$ltct = json_decode($result,JSON_PRETTY_PRINT);
 ?>
 
 
@@ -46,55 +46,31 @@ $ltdk_mon = json_decode($result,JSON_PRETTY_PRINT);
     </thead>
     <tbody>
       <?php
-      for ($i=0; $i < count($ltdk_mon['data']); $i++) {
-        if ($ltdk_mon['data'][$i]['kyhoc_id']==$filterky) {
-          if ($ltdk_mon['data'][$i]['cathi_ten']!=null and $ltdk_mon['data'][$i]['LTDK_ngaythi']!=null) {
+      for ($i=0; $i < count($ltct['data']); $i++) {
+        if ($ltct['data'][$i]['kyhoc_id']==$filterky) {
+
           ?>
           <tr>
             <td></td>
-            <td><?php echo $ltdk_mon['data'][$i]['monhoc_ma'] ?></td>
-            <td><?php echo $ltdk_mon['data'][$i]['monhoc_ten'];
-                      if ($ltdk_mon['data'][$i]['monthi_mota'] == 1)
+            <td><?php echo $ltct['data'][$i]['monhoc_ma'] ?></td>
+            <td><?php echo $ltct['data'][$i]['monhoc_ten'];
+                      if ($ltct['data'][$i]['monthi_mota'] == 1)
                       {
                         echo " (TL)";
                       };
 
              ?></td>
-            <td><?php echo $ltdk_mon['data'][$i]['cathi_ten'] ?></td>
-            <td></td>
-            <td><?php echo $ltdk_mon['data'][$i]['LTDK_ngaythi'] ?></td>
-            <td hidden><?php echo $ltdk_mon['data'][$i]['LTDK_id'] ?></td>
-            <td hidden><?php echo $ltdk_mon['data'][$i]['monthi_id'] ?></td>
+            <td><?php echo $ltct['data'][$i]['cathi_ten'] ?></td>
+            <td><?php echo $ltct['data'][$i]['phongthi_ten'] ?></td>
+            <td><?php echo $ltct['data'][$i]['ltct_ngaythi'] ?></td>
+            <td hidden><?php echo $ltct['data'][$i]['ltct_id'] ?></td>
               <td class="center">
                 <a class="open-button openFormEdit" >Edit</a>
-                <a href="/api.dangkythi/control/lichthidukien/delete.php?LTDK_id=<?php echo $ltdk_mon['data'][$i]['LTDK_id'] ?>"
+                <a href="/api.dangkythi/control/lichthidukien/delete.php?LTDK_id=<?php echo $ltct['data'][$i]['ltct_id'] ?>"
                   onclick="return checkDelete()">Delete</a>
             </td>
           </tr>
-      <?php }
-        else {
-          ?>
-          <tr style="color: red">
-            <td></td>
-            <td><?php echo $ltdk_mon['data'][$i]['monhoc_ma'] ?></td>
-            <td><?php echo $ltdk_mon['data'][$i]['monhoc_ten'];
-                      if ($ltdk_mon['data'][$i]['monthi_mota'] == 1)
-                      {
-                        echo " (TL)";
-                      };
-            ?></td>
-            <td><?php echo $ltdk_mon['data'][$i]['cathi_ten'] ?></td>
-            <td></td>
-            <td><?php echo $ltdk_mon['data'][$i]['LTDK_ngaythi'] ?></td>
-            <td hidden><?php echo $ltdk_mon['data'][$i]['LTDK_id'] ?></td>
-            <td hidden><?php echo $ltdk_mon['data'][$i]['monthi_id'] ?></td>
-              <td class="center">
-                <a class="open-button openFormEdit" >Edit</a>
-                <a href="/api.dangkythi/control/lichthidukien/delete.php?LTDK_id=<?php echo $ltdk_mon['data'][$i]['LTDK_id'] ?>"
-                  onclick="return checkDelete()">Delete</a>
-            </td>
-          </tr>
-      <?php }}} ?>
+      <?php }} ?>
 
     </tbody>
   </table>

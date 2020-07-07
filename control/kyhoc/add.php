@@ -1,7 +1,7 @@
 <?php
 if (isset($_POST['addKyhoc'])) {
 $kyhoc_ten=''.$_POST['kyhoc_ten1'].' '.$_POST['kyhoc_ten2'].'';
-$dataky = array("kyhoc_ten" =>$kyhoc_ten,"namhoc_ten" => $_POST['namhoc_ten']);
+$dataky = array("kyhoc_ten" =>$kyhoc_ten,"namhoc_ten" => $_POST['namhoc_ten'],"kyhoc_start" => $_POST['kyhoc_start'],"kyhoc_end" => $_POST['kyhoc_end']);
 }
 else {
   $dataky = array();

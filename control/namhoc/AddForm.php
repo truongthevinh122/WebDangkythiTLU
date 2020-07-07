@@ -1,5 +1,5 @@
 <style>
-.form-popup {
+.form-popup-1 {
   width: 25%;
   margin: 50px auto;
   position: fixed;
@@ -14,15 +14,15 @@
   right: 30%;
 }
 
-.input-group {
+.input-group-1 {
     margin: 10px 0px 10px 0px;
 }
-.input-group label {
+.input-group-1 label {
     display: block;
     text-align: left;
     margin: 3px;
 }
-.input-group input {
+.input-group-1 input {
     height: 30px;
     width: 96%;
     padding: 5px 10px;
@@ -43,10 +43,10 @@
 
 </style>
 
-<div class="form-popup" id="AddFormNam">
+<div class="form-popup-1" id="AddFormNam">
 
   <form method="post" action="/api.dangkythi/control/namhoc/add.php" enctype="multipart/form-data" class="form-container">
-    <div class="input-group">
+    <div class="input-group-1">
 			<label>Tên năm học</label>
 			<input type="text" name="namhoc_ten" value="" required>
 		</div>

@@ -1,5 +1,5 @@
 <style>
-.form-popup {
+.form-popup-2 {
   width: 25%;
   margin: auto auto;
   position: fixed;
@@ -15,15 +15,15 @@
   right: 30%;
 }
 
-.input-group {
+.input-group-2 {
     margin: 10px 0px 10px 0px;
 }
-.input-group label {
+.input-group-2 label {
     display: block;
     text-align: left;
     margin: 3px;
 }
-.input-group input {
+.input-group-2 input {
     height: 30px;
     width: 96%;
     padding: 5px 10px;
@@ -31,7 +31,7 @@
     border-radius: 5px;
     border: 1px solid gray;
 }
-.msg {
+.msg-2 {
     margin: 30px auto;
     padding: 10px;
     border-radius: 5px;
@@ -44,10 +44,10 @@
 
 </style>
 
-<div class="form-popup" id="AddFormKy">
+<div class="form-popup-2" id="AddFormKy">
 
   <form method="post" action="/api.dangkythi/control/kyhoc/add.php" enctype="multipart/form-data" class="form-container">
-    <div class="input-group">
+    <div class="input-group-2">
 			<label>Kỳ học</label>
 			<select class="form-control" name="kyhoc_ten1">
         <option selected disabled>Chọn Kỳ</option>
@@ -56,7 +56,7 @@
         <option value="Học kỳ III">Học kỳ III</option>
       </select>
 		</div>
-    <div class="input-group">
+    <div class="input-group-2">
 			<label>Nhóm</label>
 			<select class="form-control" name="kyhoc_ten2">
         <option selected disabled>Chọn nhóm</option>
@@ -65,7 +65,7 @@
         <option value="Nhóm 3">Nhóm 3</option>
       </select>
 		</div>
-    <div class="input-group">
+    <div class="input-group-2">
 			<label>Năm học</label>
 			<select class="form-control" name="namhoc_ten">
         <option selected disabled>Chọn năm học</option>
@@ -76,6 +76,15 @@
         <?php } ?>
       </select>
 		</div>
+    <div class="input-group-2">
+      <label>Ngày bắt đầu</label>
+      <input type="date" name="kyhoc_start" >
+    </div>
+    <div class="input-group-2">
+      <label>Ngày bắt đầu</label>
+      <input type="date" name="kyhoc_end" >
+    </div>
+
     <button type="submit" name="addKyhoc" class="btn btn-primary">Add</button>
     <button type="button" class="btn btn-danger" onclick="closeFormAddKy()">Close</button>
   </form>

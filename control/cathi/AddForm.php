@@ -1,7 +1,7 @@
 <style>
-.form-popup {
+.form-popup-4 {
   width: 25%;
-  margin: 50px auto;
+  margin: auto auto;
   position: fixed;
   text-align: left;
   padding: 20px;
@@ -14,15 +14,15 @@
   right: 30%;
 }
 
-.input-group {
+.input-group-4 {
     margin: 10px 0px 10px 0px;
 }
-.input-group label {
+.input-group-4 label {
     display: block;
     text-align: left;
     margin: 3px;
 }
-.input-group input {
+.input-group-4 input {
     height: 30px;
     width: 96%;
     padding: 5px 10px;
@@ -43,18 +43,18 @@
 
 </style>
 
-<div class="form-popup" id="AddFormCa">
+<div class="form-popup-4" id="AddFormCa">
 
   <form method="post" action="/api.dangkythi/control/cathi/add.php" enctype="multipart/form-data" class="form-container">
-    <div class="input-group">
+    <div class="input-group-4">
 			<label>Tên ca thi</label>
 			<input type="text" name="cathi_ten" value="" required>
 		</div>
-    <div class="input-group">
+    <div class="input-group-4">
 			<label>Giờ bắt đầu</label>
 			<input type="time" name="batdau" value="" required>
 		</div>
-    <div class="input-group">
+    <div class="input-group-4">
 			<label>Giờ kết thúc</label>
 			<input type="time" name="ketthuc" value="" required>
 		</div>

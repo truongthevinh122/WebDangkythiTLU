@@ -15,7 +15,7 @@ $cathi = json_decode($result,JSON_PRETTY_PRINT);
 ?>
 
 <div class="panel-heading">
-  Năm học
+  Ca thi
   <?php include('../control/cathi/AddForm.php') ?>
   <a class="btn btn-primary open-button" onclick="openFormAddCa()">Add</a>
 </div>

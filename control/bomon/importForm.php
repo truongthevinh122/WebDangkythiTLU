@@ -1,5 +1,5 @@
 <style>
-.form-popup {
+.form-popup-3 {
 display: none;
 position: fixed;
 bottom: 50%;
@@ -15,7 +15,7 @@ z-index: 9;
 }
 
 </style>
-<div class="form-popup" id="importBM">
+<div class="form-popup-3" id="importBM">
 
   <form method="post" id="import_excel_form" enctype="multipart/form-data" class="form-container">
     <table>
